@@ -80,9 +80,10 @@ public class Villanos {
     public void setListSuperpoderes(ArrayList<Superpoderes> listSuperpoderes) {
         this.listSuperpoderes = listSuperpoderes;
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return nombre + "-" + edad + "-" + num_muertes; 
+    }
+     
 }
