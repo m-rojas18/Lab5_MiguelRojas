@@ -150,6 +150,11 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jl_listaVillanos);
 
         jb_mover.setText("--- >");
+        jb_mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_moverMouseClicked(evt);
+            }
+        });
 
         jb_superpoderes.setText("Superpoderes");
         jb_superpoderes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -889,13 +894,13 @@ public class Principal extends javax.swing.JFrame {
         if (listSuperpoderes.isEmpty()) {
             JOptionPane.showMessageDialog(jd_menu, "Debe existir un superpoder para crear un Villano");
         } else {
-        
-        jd_villanos.pack();
-        jd_villanos.setModal(true);
-        jd_villanos.setLocationRelativeTo(jd_menu);
-        jd_villanos.setVisible(true);
+
+            jd_villanos.pack();
+            jd_villanos.setModal(true);
+            jd_villanos.setLocationRelativeTo(jd_menu);
+            jd_villanos.setVisible(true);
         }
-        
+
 
     }//GEN-LAST:event_jb_villanoMouseClicked
 
@@ -1012,25 +1017,25 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_crearVillanoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearVillanoMouseClicked
         // TODO add your handling code here:
-        
+
         String nombreV = "";
         int edad;
         String planetaV = "";
         double alturaV;
         int num_muertes;
         boolean atrapado = false;
-        
+
         try {
             nombreV = tf_nombreV.getText();
             edad = (Integer) js_edadVillano.getValue();
             planetaV = tf_planetaV.getText();
             alturaV = Double.parseDouble(tf_alturaV.getText());
             num_muertes = Integer.parseInt(tf_muertes.getText());
-            
+
             Villanos vil = new Villanos(nombreV, edad, planetaV, alturaV, atrapado, num_muertes);
             listVillains.add(vil);
-            
-            JOptionPane.showMessageDialog(jd_villanos,"Villano creado con exito ;)");
+
+            JOptionPane.showMessageDialog(jd_villanos, "Villano creado con exito ;)");
             tf_nombreV.setText("");
             tf_planetaV.setText("");
             js_edadVillano.setValue(20);
@@ -1038,16 +1043,16 @@ public class Principal extends javax.swing.JFrame {
             tf_alturaV.setText("");
             //Refrescar Lista de Villanos Eliminar
             refrescarListaEliminarV();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(jd_menu, "Ocurrio un Error Fatal", "Warning", JOptionPane.WARNING_MESSAGE);
-            
+
         }
     }//GEN-LAST:event_jb_crearVillanoMouseClicked
 
     private void jb_eliminarVillanosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_eliminarVillanosMouseClicked
         // TODO add your handling code here:
-        
+
         int posicion = jl_eliminarVillanos.getSelectedIndex();
         Villanos s = listVillains.get(posicion);
 
@@ -1065,7 +1070,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_poderVillainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_poderVillainMouseClicked
         // TODO add your handling code here:
-        
+
         if (listVillains.isEmpty()) {
             JOptionPane.showMessageDialog(jd_villanos, "No existe ningun villano", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -1098,13 +1103,12 @@ public class Principal extends javax.swing.JFrame {
 
         }
 
-        
-        
+
     }//GEN-LAST:event_jb_poderVillainMouseClicked
 
     private void jb_equipoVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_equipoVMouseClicked
         // TODO add your handling code here:
-        
+
         if (listVillains.isEmpty()) {
             JOptionPane.showMessageDialog(jd_villanos, "No existe ningun heroe", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -1141,6 +1145,155 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jb_equipoVMouseClicked
+
+    private void jb_moverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_moverMouseClicked
+        // TODO add your handling code here:
+        if (jl_listaSuperheroes.getSelectedIndex() >= 0) {
+            DefaultTreeModel modelTree = (DefaultTreeModel) jt_arbol.getModel();
+
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelTree.getRoot();
+            
+            DefaultMutableTreeNode vengadores = new DefaultMutableTreeNode("Vengadores");
+            DefaultMutableTreeNode x_men = new DefaultMutableTreeNode("X-MEN");
+            
+            raiz.add(vengadores);
+            raiz.add(x_men);
+            DefaultListModel modeloLISTA = (DefaultListModel) jl_listaSuperheroes.getModel();
+            
+            String nombre;
+            int edad;
+            String planeta_origen;
+            int num_villanosCapturados;
+            double altura;
+            //jl_vengadores;
+            nombre = ((Superheroes) modeloLISTA.get(jl_vengadores.getSelectedIndex())).getNombre();
+            edad = ((Superheroes)modeloLISTA.get(jl_vengadores.getSelectedIndex())).getEdad();
+            planeta_origen = ((Superheroes)modeloLISTA.get(jl_vengadores.getSelectedIndex())).getPlaneta_origen();
+            num_villanosCapturados = ((Superheroes)modeloLISTA.get(jl_vengadores.getSelectedIndex())).getNum_villanosCapturados();
+            altura = ((Superheroes)modeloLISTA.get(jl_vengadores.getSelectedIndex())).getAltura();
+            
+            int centinela = -1;
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                if (raiz.getChildAt(i).equals("Vengadores")) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(new Superheroes(nombre, edad, planeta_origen, altura, num_villanosCapturados));
+                    ((DefaultMutableTreeNode) vengadores.getChildAt(i)).add(p);
+                    centinela = 1;
+                } //fin if
+            } //fin for 
+            
+            if (centinela == -1) {
+                //DefaultMutableTreeNode n = new DefaultMutableTreeNode("Vengadores");
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(new Superheroes(nombre, edad, planeta_origen, altura, num_villanosCapturados));
+                vengadores.add(p);
+            }  // fin if          
+            modelTree.reload();
+            
+            //X-Men
+            String nombre2;
+            int edad2;
+            String planeta_origen2;
+            int num_villanosCapturados2;
+            double altura2;
+            //jl_vengadores;
+            nombre2 = ((Superheroes) modeloLISTA.get(jl_xmen.getSelectedIndex())).getNombre();
+            edad2 = ((Superheroes)modeloLISTA.get(jl_xmen.getSelectedIndex())).getEdad();
+            planeta_origen2 = ((Superheroes)modeloLISTA.get(jl_xmen.getSelectedIndex())).getPlaneta_origen();
+            num_villanosCapturados2 = ((Superheroes)modeloLISTA.get(jl_xmen.getSelectedIndex())).getNum_villanosCapturados();
+            altura2 = ((Superheroes)modeloLISTA.get(jl_xmen.getSelectedIndex())).getAltura();
+            
+            int centinela2 = -1;
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                if (raiz.getChildAt(i).equals("X-MEN")) {
+                    DefaultMutableTreeNode x = new DefaultMutableTreeNode(new Superheroes(nombre, edad, planeta_origen, altura, num_villanosCapturados));
+                    ((DefaultMutableTreeNode) x_men.getChildAt(i)).add(x);
+                    centinela2 = 1;
+                }
+            }
+            
+            if (centinela2 == -1) {
+                DefaultMutableTreeNode y = new DefaultMutableTreeNode(new Superheroes(nombre, edad, planeta_origen, altura, num_villanosCapturados));
+                x_men.add(y); 
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "No hay Heroe Seleccionado");
+        }
+        //Validar Villanos
+        if (jl_listaVillanos.getSelectedIndex() >= 0) {
+            DefaultTreeModel modelTree = (DefaultTreeModel) jt_arbol.getModel();
+
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelTree.getRoot();
+            
+            DefaultMutableTreeNode dark = new DefaultMutableTreeNode("Dark Avengers");
+            DefaultMutableTreeNode six = new DefaultMutableTreeNode("Sinister Six");
+            
+            raiz.add(dark);
+            raiz.add(six);
+            DefaultListModel modeloLISTA = (DefaultListModel) jl_listaVillanos.getModel();
+            
+            String nombre3;
+            int edad3;
+            String planeta_origen3;
+            int num_muertes3;
+            double altura3;
+            boolean atrapado = false;
+            
+            nombre3 = ((Villanos) modeloLISTA.get(jl_darkAvengers.getSelectedIndex())).getNombre();
+            edad3 = ((Villanos)modeloLISTA.get(jl_darkAvengers.getSelectedIndex())).getEdad();
+            planeta_origen3 = ((Villanos)modeloLISTA.get(jl_darkAvengers.getSelectedIndex())).getPlaneta_origenV();
+            num_muertes3 = ((Villanos)modeloLISTA.get(jl_darkAvengers.getSelectedIndex())).getNum_muertes();
+            altura3 = ((Villanos)modeloLISTA.get(jl_darkAvengers.getSelectedIndex())).getAltura_villain();
+            
+            int centinela = -1;
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                if (raiz.getChildAt(i).equals("Dark Avengers")) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(new Villanos(nombre3, edad3, planeta_origen3, altura3, atrapado, num_muertes3));
+                    ((DefaultMutableTreeNode) dark.getChildAt(i)).add(p);
+                    centinela = 1;
+                } //fin if
+            } //fin for 
+            
+            if (centinela == -1) {
+                //DefaultMutableTreeNode n = new DefaultMutableTreeNode("Vengadores");
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(new Villanos(nombre3, edad3, planeta_origen3, altura3, atrapado, num_muertes3));
+                dark.add(p);
+            }  // fin if          
+            modelTree.reload();
+            
+            //X-Men
+            String nombre2;
+            int edad2;
+            String planeta_origen2;
+            int num_villanosCapturados2;
+            double altura2;
+            //jl_vengadores;
+            nombre2 = ((Superheroes) modeloLISTA.get(jl_sinisterSix.getSelectedIndex())).getNombre();
+            edad2 = ((Superheroes)modeloLISTA.get(jl_sinisterSix.getSelectedIndex())).getEdad();
+            planeta_origen2 = ((Superheroes)modeloLISTA.get(jl_sinisterSix.getSelectedIndex())).getPlaneta_origen();
+            num_villanosCapturados2 = ((Superheroes)modeloLISTA.get(jl_sinisterSix.getSelectedIndex())).getNum_villanosCapturados();
+            altura2 = ((Superheroes)modeloLISTA.get(jl_sinisterSix.getSelectedIndex())).getAltura();
+            
+            int centinela2 = -1;
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                if (raiz.getChildAt(i).equals("Sinister Six")) {
+                    DefaultMutableTreeNode x = new DefaultMutableTreeNode(new Villanos(nombre3, edad3, planeta_origen3, altura3, atrapado, num_muertes3));
+                    ((DefaultMutableTreeNode) six.getChildAt(i)).add(x);
+                    centinela2 = 1;
+                }
+            }
+            
+            if (centinela2 == -1) {
+                DefaultMutableTreeNode y = new DefaultMutableTreeNode(new Villanos(nombre3, edad3, planeta_origen3, altura3, atrapado, num_muertes3));
+                six.add(y); 
+            }    
+            
+        } else {
+            JOptionPane.showMessageDialog(jd_menu, "No hay Villano Seleccionado");
+        }
+        
+        
+    }//GEN-LAST:event_jb_moverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1274,7 +1427,9 @@ public class Principal extends javax.swing.JFrame {
     ArrayList<Superpoderes> listSuperpoderes = new ArrayList();
     ArrayList<Superheroes> listSupers = new ArrayList();
     ArrayList<Villanos> listVillains = new ArrayList();
-
+    DefaultMutableTreeNode nodo_seleccionado;
+    Superheroes heroe_seleccionada;
+    Villanos villano_seleccionado;
     public void refrescarListaEliminarH() {
 
         DefaultListModel m = new DefaultListModel();
@@ -1297,24 +1452,24 @@ public class Principal extends javax.swing.JFrame {
     public void refrescarX_Men() {
         DefaultListModel m = new DefaultListModel();
 
-        for (Superpoderes li : listSuperpoderes) {
+        for (Superheroes li : listSupers) {
             m.addElement(li);
         }
         jl_xmen.setModel(m);
     }
-    
-    public void refrescarGeneralH(){
+
+    public void refrescarGeneralH() {
         //Refrescar Generales
         DefaultListModel m = new DefaultListModel();
         //Lista Heroes
         for (Superheroes li : listSupers) {
             m.addElement(li);
         }
-        jl_listaSuperheroes.setModel(m); 
-        
+        jl_listaSuperheroes.setModel(m);
+
     }
-    
-    public void refrescarGeneralV(){
+
+    public void refrescarGeneralV() {
         DefaultListModel mod = new DefaultListModel();
         //Lista Villanos
         for (Villanos li : listVillains) {
@@ -1322,28 +1477,28 @@ public class Principal extends javax.swing.JFrame {
         }
         jl_listaVillanos.setModel(mod);
     }
-    
-    public void refrescarListaEliminarV(){
+
+    public void refrescarListaEliminarV() {
         DefaultListModel mod = new DefaultListModel();
         for (Villanos li : listVillains) {
             mod.addElement(li);
         }
         jl_eliminarVillanos.setModel(mod);
-        
+
     }
-    
-    public void refrescarDarkAvengers(){
-        
+
+    public void refrescarDarkAvengers() {
+
         DefaultListModel mod = new DefaultListModel();
         for (Superpoderes li : listSuperpoderes) {
             mod.addElement(li);
         }
         jl_darkAvengers.setModel(mod);
-        
+
     }
-    
-    public void refrescarSinisterSix(){
-        
+
+    public void refrescarSinisterSix() {
+
         DefaultListModel mod = new DefaultListModel();
         for (Superpoderes li : listSuperpoderes) {
             mod.addElement(li);
