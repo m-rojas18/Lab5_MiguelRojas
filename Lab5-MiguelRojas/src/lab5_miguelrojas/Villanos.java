@@ -1,10 +1,10 @@
 package lab5_miguelrojas;
 
+import java.util.ArrayList;
+
 public class Villanos {
     
-    Superpoderes spV = new Superpoderes();
-    Superpoderes spV2 = new Superpoderes();
-    Superpoderes spV3 = new Superpoderes();
+    ArrayList<Superpoderes> listSuperpoderes = new ArrayList();
     private String nombre;
     private int edad;
     private String planeta_origenV;
@@ -23,30 +23,6 @@ public class Villanos {
         this.altura_villain = altura_villain;
         this.atrapado = atrapado;
         this.num_muertes = num_muertes;
-    }
-
-    public Superpoderes getSpV() {
-        return spV;
-    }
-
-    public void setSpV(Superpoderes spV) {
-        this.spV = spV;
-    }
-
-    public Superpoderes getSpV2() {
-        return spV2;
-    }
-
-    public void setSpV2(Superpoderes spV2) {
-        this.spV2 = spV2;
-    }
-
-    public Superpoderes getSpV3() {
-        return spV3;
-    }
-
-    public void setSpV3(Superpoderes spV3) {
-        this.spV3 = spV3;
     }
 
     public String getNombre() {
@@ -96,6 +72,16 @@ public class Villanos {
     public void setNum_muertes(int num_muertes) {
         this.num_muertes = num_muertes;
     }
+
+    public ArrayList<Superpoderes> getListSuperpoderes() {
+        return listSuperpoderes;
+    }
+
+    public void setListSuperpoderes(ArrayList<Superpoderes> listSuperpoderes) {
+        this.listSuperpoderes = listSuperpoderes;
+    }
+    
+    
     
     
     

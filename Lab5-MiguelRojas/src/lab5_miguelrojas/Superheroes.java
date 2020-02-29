@@ -1,10 +1,10 @@
 package lab5_miguelrojas;
 
+import java.util.ArrayList;
+
 public class Superheroes {
     
-    Superpoderes spH = new Superpoderes();
-    Superpoderes spH2 = new Superpoderes();
-    Superpoderes spH3 = new Superpoderes();
+    ArrayList<Superpoderes> listSuperpoderes = new ArrayList();
     
     private String nombre;
     private int edad;
@@ -23,32 +23,6 @@ public class Superheroes {
         this.num_villanosCapturados = num_villanosCapturados;
     }
 
-
-    public Superpoderes getSpH() {
-        return spH;
-    }
-
-    public void setSpH(Superpoderes spH) {
-        this.spH = spH;
-    }
-
-    public Superpoderes getSpH2() {
-        return spH2;
-    }
-
-    public void setSpH2(Superpoderes spH2) {
-        this.spH2 = spH2;
-    }
-
-    public Superpoderes getSpH3() {
-        return spH3;
-    }
-
-    public void setSpH3(Superpoderes spH3) {
-        this.spH3 = spH3;
-    }
-    
-    
 
     public String getNombre() {
         return nombre;
@@ -88,6 +62,19 @@ public class Superheroes {
 
     public void setNum_villanosCapturados(int num_villanosCapturados) {
         this.num_villanosCapturados = num_villanosCapturados;
+    }
+
+    public ArrayList<Superpoderes> getListSuperpoderes() {
+        return listSuperpoderes;
+    }
+
+    public void setListSuperpoderes(ArrayList<Superpoderes> listSuperpoderes) {
+        this.listSuperpoderes = listSuperpoderes;
+    }
+
+    @Override
+    public String toString() {
+        return  nombre;
     }
     
     
