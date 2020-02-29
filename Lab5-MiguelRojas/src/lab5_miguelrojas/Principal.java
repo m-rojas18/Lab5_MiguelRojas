@@ -103,6 +103,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jb_poderVillain = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jmi_agregar = new javax.swing.JMenuItem();
+        jmi_eliminar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -720,6 +723,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jmi_agregar.setText("jMenuItem1");
+        jmi_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_agregarActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jmi_agregar);
+
+        jmi_eliminar.setText("jMenuItem2");
+        jPopupMenu1.add(jmi_eliminar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -1292,8 +1306,21 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jd_menu, "No hay Villano Seleccionado");
         }
         
+        if (evt.getClickCount() == 2) {
+            jl_listaSuperheroes.removeAll();
+            jl_eliminarVillanos.removeAll();
+            refrescarGeneralH();
+            refrescarGeneralV();
+        }
+        
         
     }//GEN-LAST:event_jb_moverMouseClicked
+
+    private void jmi_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_agregarActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jmi_agregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1367,6 +1394,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1402,6 +1430,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_sinisterSix;
     private javax.swing.JList<String> jl_vengadores;
     private javax.swing.JList<String> jl_xmen;
+    private javax.swing.JMenuItem jmi_agregar;
+    private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JPanel jp_agregarV;
     private javax.swing.JPanel jp_crear;
     private javax.swing.JPanel jp_crearV;
