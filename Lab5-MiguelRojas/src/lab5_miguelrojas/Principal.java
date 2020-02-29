@@ -785,7 +785,7 @@ public class Principal extends javax.swing.JFrame {
         int posicion = jl_eliminarSupers.getSelectedIndex();
         Superheroes s = listSupers.get(posicion);
 
-        int n = JOptionPane.showConfirmDialog(jd_superheroe, "¿Seguro?", "Eliminar Alumno",
+        int n = JOptionPane.showConfirmDialog(jd_superheroe, "¿Seguro?", "Eliminar Heroe",
                 JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             listSupers.remove(s);
@@ -811,14 +811,28 @@ public class Principal extends javax.swing.JFrame {
 
             String opcion = JOptionPane.showInputDialog(jd_superheroe, nombres);
             int op = Integer.parseInt(opcion);
-            
+
             String equipo = "[1] Vengadores \n[2] X-Men";
             String eq = JOptionPane.showInputDialog(jd_superheroe, equipo);
             int op_equipo = Integer.parseInt(eq);
-            
+
             //Agregar Vengadores
             if (listSupers.get(op).getListSuperpoderes().isEmpty()) {
-                
+                JOptionPane.showMessageDialog(jd_superheroe, "no tiene poderes, \nNo puede formar parte de ningun equipo",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (op_equipo == 1) {
+                    JOptionPane.showMessageDialog(jd_superheroe, "Felicidades\nEs parte de los Vengadores!!");
+                    refrescarVengadores();
+                    refrescarHeroesGeneral();
+                } else if (op_equipo == 2) {
+                    JOptionPane.showMessageDialog(jd_superheroe, "Felicidades\nAhora es parte de los X-Men!!");
+                    refrescarX_Men();
+                    refrescarHeroesGeneral();
+                } else {
+                    //do nothing
+                }
+
             }
 
         }
@@ -991,6 +1005,42 @@ public class Principal extends javax.swing.JFrame {
         // en Eliminar
         jl_eliminarSupers.setModel(m);
 
+    }
+
+    public void refrescarVengadores() {
+        DefaultListModel mod = new DefaultListModel();
+        for (Superheroes l : listSupers) {
+            mod.addElement(l);
+        }
+        jl_vengadores.setModel(mod);
+    }
+
+    public void refrescarX_Men() {
+        DefaultListModel m = new DefaultListModel();
+
+        for (Superpoderes li : listSuperpoderes) {
+            m.addElement(li);
+        }
+        jl_xmen.setModel(m);
+    }
+    
+    public void refrescarHeroesGeneral(){
+        DefaultListModel m = new DefaultListModel();
+
+        for (Superpoderes li : listSuperpoderes) {
+            m.addElement(li);
+        }
+        jl_listaSuperheroes.setModel(m);
+        
+    }
+    
+    public void refrescarVillanosGeneral(){
+        DefaultListModel m = new DefaultListModel();
+
+        for (Superpoderes li : listSuperpoderes) {
+            m.addElement(li);
+        }
+        jl_listaVillanos.setModel(m);
     }
 
 }

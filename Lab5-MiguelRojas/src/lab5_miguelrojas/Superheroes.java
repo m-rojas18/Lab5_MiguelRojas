@@ -74,7 +74,7 @@ public class Superheroes {
 
     @Override
     public String toString() {
-        return  nombre;
+        return  nombre + "-" + edad + "-" + planeta_origen;
     }
     
     
